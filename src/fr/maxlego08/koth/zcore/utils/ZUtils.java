@@ -169,7 +169,7 @@ public abstract class ZUtils extends MessageUtils {
     /**
      * Check if the item name is the same as the given string
      *
-     * @param stack
+     * @param itemStack
      * @param name
      * @return true if the item name is the same as string
      */
@@ -180,7 +180,7 @@ public abstract class ZUtils extends MessageUtils {
     /**
      * Check if the item name contains the given string
      *
-     * @param stack
+     * @param itemStack
      * @param name
      * @return true if the item name contains the string
      */
@@ -192,7 +192,6 @@ public abstract class ZUtils extends MessageUtils {
      * Remove the item from the player's hand
      *
      * @param player
-     * @param number of items to withdraw
      */
     protected void removeItemInHand(Player player) {
         removeItemInHand(player, 64);
@@ -202,7 +201,6 @@ public abstract class ZUtils extends MessageUtils {
      * Remove the item from the player's hand
      *
      * @param player
-     * @param number of items to withdraw
      */
     protected void removeItemInHand(Player player, int how) {
         if (player.getItemInHand().getAmount() > how)
@@ -214,8 +212,8 @@ public abstract class ZUtils extends MessageUtils {
     /**
      * Check if two locations are identical
      *
-     * @param first  location
-     * @param second location
+     * @param l  first location
+     * @param l2 second location
      * @return true if both rentals are the same
      */
     protected boolean same(Location l, Location l2) {
@@ -239,7 +237,7 @@ public abstract class ZUtils extends MessageUtils {
      * @param player   who will be teleported
      * @param delay    before the teleportation of the player
      * @param location where the player will be teleported
-     * @param code     executed when the player is teleported or not
+     * @param cmd     executed when the player is teleported or not
      */
     protected void teleport(Player player, int delay, Location location, Consumer<Boolean> cmd) {
         if (teleportPlayers.contains(player.getName())) {
@@ -358,7 +356,7 @@ public abstract class ZUtils extends MessageUtils {
     }
 
     /**
-     * @param string
+     * @param itemStack
      * @return
      */
     protected String name(ItemStack itemStack) {
@@ -433,7 +431,7 @@ public abstract class ZUtils extends MessageUtils {
 
     /**
      * @param player
-     * @param inventoryId
+     * @param inventory
      */
     protected void createInventory(KothPlugin plugin, Player player, EnumInventory inventory) {
         createInventory(plugin, player, inventory, 1);
@@ -441,7 +439,7 @@ public abstract class ZUtils extends MessageUtils {
 
     /**
      * @param player
-     * @param inventoryId
+     * @param inventory
      * @param page
      */
     protected void createInventory(KothPlugin plugin, Player player, EnumInventory inventory, int page) {
@@ -451,7 +449,7 @@ public abstract class ZUtils extends MessageUtils {
 
     /**
      * @param player
-     * @param inventoryId
+     * @param inventory
      * @param page
      * @param objects
      */
@@ -489,7 +487,7 @@ public abstract class ZUtils extends MessageUtils {
 
     /**
      * @param delay
-     * @param runnable
+     * @param consumer
      */
     protected TimerTask scheduleFix(Plugin plugin, long delay, BiConsumer<TimerTask, Boolean> consumer) {
         return this.scheduleFix(plugin, delay, delay, consumer);
@@ -499,7 +497,7 @@ public abstract class ZUtils extends MessageUtils {
      * @param plugin
      * @param startAt
      * @param delay
-     * @param runnable
+     * @param consumer
      */
     protected TimerTask scheduleFix(Plugin plugin, long startAt, long delay, BiConsumer<TimerTask, Boolean> consumer) {
         TimerTask task = new TimerTask() {
@@ -520,7 +518,7 @@ public abstract class ZUtils extends MessageUtils {
     /**
      * Get random element from list
      *
-     * @param elements
+     * @param element
      * @return element
      */
     protected <T> T randomElement(List<T> element) {
@@ -638,7 +636,7 @@ public abstract class ZUtils extends MessageUtils {
     }
 
     /**
-     * @param message
+     * @param messages
      * @return
      */
     protected TextComponent setHoverMessage(TextComponent component, String... messages) {
@@ -650,7 +648,7 @@ public abstract class ZUtils extends MessageUtils {
     }
 
     /**
-     * @param message
+     * @param messages
      * @return
      */
     protected TextComponent setHoverMessage(TextComponent component, List<String> messages) {
@@ -1057,7 +1055,7 @@ public abstract class ZUtils extends MessageUtils {
      */
     public void glow(ItemStack itemStack) {
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.addEnchant(Enchantment.ARROW_DAMAGE, 1, true);
+        itemMeta.addEnchant(Enchantment.POWER, 1, true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         itemStack.setItemMeta(itemMeta);
     }

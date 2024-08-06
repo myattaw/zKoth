@@ -10,8 +10,6 @@ import fr.maxlego08.koth.hook.scoreboard.DefaultHook;
 import fr.maxlego08.koth.placeholder.LocalPlaceholder;
 import fr.maxlego08.koth.save.Config;
 import fr.maxlego08.koth.save.MessageLoader;
-import fr.maxlego08.koth.scheduler.ZkothImplementation;
-import fr.maxlego08.koth.scoreboard.ScoreBoardManager;
 import fr.maxlego08.koth.storage.StorageManager;
 import fr.maxlego08.koth.zcore.ZPlugin;
 import fr.maxlego08.koth.zcore.logger.Logger;
@@ -25,7 +23,6 @@ import fr.maxlego08.koth.zcore.utils.plugins.Plugins;
  */
 public class KothPlugin extends ZPlugin {
 
-    private final ScoreBoardManager scoreBoardManager = new ScoreBoardManager(this);
     private KothManager kothManager;
     private StorageManager storageManager;
     private KothScoreboard kothScoreboard = new DefaultHook();
@@ -63,13 +60,7 @@ public class KothPlugin extends ZPlugin {
                 break;
             }
         }
-        this.scoreBoardManager.setScoreboard(this.kothScoreboard);
-
-        if (this.isEnable(Plugins.ZSCHEDULERS)) {
-            Logger.info("Register zScheduler implementation", Logger.LogType.INFO);
-            ZkothImplementation implementation = new ZkothImplementation(this);
-            implementation.register();
-        }
+//        this.scoreBoardManager.setScoreboard(this.kothScoreboard);
 
         if (this.isEnable(Plugins.DH)) {
             Logger.info("Register DecentHologram implementation", Logger.LogType.INFO);
@@ -88,7 +79,7 @@ public class KothPlugin extends ZPlugin {
         this.preDisable();
 
         this.kothHologram.onDisable();
-        this.scoreBoardManager.setRunning(false);
+//        this.scoreBoardManager.setRunning(false);
         this.saveFiles();
 
         this.postDisable();
@@ -104,10 +95,6 @@ public class KothPlugin extends ZPlugin {
 
     public StorageManager getStorageManager() {
         return this.storageManager;
-    }
-
-    public ScoreBoardManager getScoreBoardManager() {
-        return scoreBoardManager;
     }
 
     public KothHologram getKothHologram() {

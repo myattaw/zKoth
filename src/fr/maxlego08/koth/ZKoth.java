@@ -20,7 +20,6 @@ import fr.maxlego08.koth.api.utils.RandomCommand;
 import fr.maxlego08.koth.api.utils.ScoreboardConfiguration;
 import fr.maxlego08.koth.hook.teams.NoneHook;
 import fr.maxlego08.koth.save.Config;
-import fr.maxlego08.koth.scoreboard.ScoreBoardManager;
 import fr.maxlego08.koth.zcore.enums.Message;
 import fr.maxlego08.koth.zcore.logger.Logger;
 import fr.maxlego08.koth.zcore.utils.Cuboid;
@@ -28,7 +27,6 @@ import fr.maxlego08.koth.zcore.utils.ProgressBar;
 import fr.maxlego08.koth.zcore.utils.ZUtils;
 import fr.maxlego08.koth.zcore.utils.builder.TimerBuilder;
 import fr.maxlego08.koth.zcore.utils.interfaces.CollectionConsumer;
-import fr.mrmicky.fastboard.FastBoard;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -292,7 +290,6 @@ public class ZKoth extends ZUtils implements Koth {
         this.timerTask = null;
         this.remainingSeconds = null;
         this.playersValues.clear();
-        this.plugin.getScoreBoardManager().clearBoard();
         // this.resetBlocks();
         if (this.timerTaskStop != null) this.timerTaskStop.cancel();
 
@@ -324,11 +321,11 @@ public class ZKoth extends ZUtils implements Koth {
         if (this.discordWebhookConfig != null) this.discordWebhookConfig.send(this.plugin, this, KothEvent.START);
 
         if (this.cooldownScoreboard.isEnable()) {
-            ScoreBoardManager scoreBoardManager = this.plugin.getScoreBoardManager();
-            scoreBoardManager.setLinesAndSchedule(onScoreboard());
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                scoreBoardManager.createBoard(player, color(this.cooldownScoreboard.getTitle()));
-            }
+//            ScoreBoardManager scoreBoardManager = this.plugin.getScoreBoardManager();
+//            scoreBoardManager.setLinesAndSchedule(onScoreboard());
+//            for (Player player : Bukkit.getOnlinePlayers()) {
+//                scoreBoardManager.createBoard(player, color(this.cooldownScoreboard.getTitle()));
+//            }
         }
 
         this.timerTask = scheduleFix(this.plugin, 0, Config.enableDebug ? 10 : 1000, (task, isCancelled) -> {
@@ -355,7 +352,7 @@ public class ZKoth extends ZUtils implements Koth {
                 return;
             }
 
-            this.plugin.getScoreBoardManager().update();
+//            this.plugin.getScoreBoardManager().update();
             this.remainingSeconds.decrementAndGet();
         });
     }
@@ -375,26 +372,26 @@ public class ZKoth extends ZUtils implements Koth {
 
         broadcast(Message.EVENT_START);
 
-        ScoreBoardManager scoreBoardManager = this.plugin.getScoreBoardManager();
-        if (!this.cooldownScoreboard.isEnable() && this.startScoreboard.isEnable()) {
-            scoreBoardManager.setLinesAndSchedule(onScoreboard());
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                scoreBoardManager.createBoard(player, color(this.startScoreboard.getTitle()));
-            }
-        } else if (this.cooldownScoreboard.isEnable() && this.startScoreboard.isEnable()) {
-            if (scoreBoardManager.getBoards().isEmpty()) {
-                scoreBoardManager.setLinesAndSchedule(onScoreboard());
-                for (Player player : Bukkit.getOnlinePlayers()) {
-                    scoreBoardManager.createBoard(player, color(this.startScoreboard.getTitle()));
-                }
-            } else {
-                for (Player player : Bukkit.getOnlinePlayers()) {
-                    FastBoard board = scoreBoardManager.getBoard(player);
-                    if (board == null) scoreBoardManager.createBoard(player, color(this.startScoreboard.getTitle()));
-                    else board.updateTitle(color(this.startScoreboard.getTitle()));
-                }
-            }
-        }
+//        ScoreBoardManager scoreBoardManager = this.plugin.getScoreBoardManager();
+//        if (!this.cooldownScoreboard.isEnable() && this.startScoreboard.isEnable()) {
+//            scoreBoardManager.setLinesAndSchedule(onScoreboard());
+//            for (Player player : Bukkit.getOnlinePlayers()) {
+//                scoreBoardManager.createBoard(player, color(this.startScoreboard.getTitle()));
+//            }
+//        } else if (this.cooldownScoreboard.isEnable() && this.startScoreboard.isEnable()) {
+//            if (scoreBoardManager.getBoards().isEmpty()) {
+//                scoreBoardManager.setLinesAndSchedule(onScoreboard());
+//                for (Player player : Bukkit.getOnlinePlayers()) {
+//                    scoreBoardManager.createBoard(player, color(this.startScoreboard.getTitle()));
+//                }
+//            } else {
+//                for (Player player : Bukkit.getOnlinePlayers()) {
+//                    FastBoard board = scoreBoardManager.getBoard(player);
+//                    if (board == null) scoreBoardManager.createBoard(player, color(this.startScoreboard.getTitle()));
+//                    else board.updateTitle(color(this.startScoreboard.getTitle()));
+//                }
+//            }
+//        }
 
         // this.changeBlocks(Config.noOneCapturingMaterial, true);
 
@@ -608,7 +605,7 @@ public class ZKoth extends ZUtils implements Koth {
         broadcast(Message.EVENT_WIN);
 
         this.plugin.getKothHologram().end(this);
-        this.plugin.getScoreBoardManager().clearBoard();
+//        this.plugin.getScoreBoardManager().clearBoard();
 
         this.endCommands.forEach(command -> dispatchCommand(command, player));
         if (this.maxRandomCommands != 0 && this.randomCommands.size() != 0) {
@@ -829,7 +826,7 @@ public class ZKoth extends ZUtils implements Koth {
     @Override
     public void updateDisplay() {
         this.plugin.getKothHologram().update(this);
-        this.plugin.getScoreBoardManager().update();
+//        this.plugin.getScoreBoardManager().update();
     }
 
     @Override

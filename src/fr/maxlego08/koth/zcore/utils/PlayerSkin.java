@@ -66,8 +66,8 @@ public class PlayerSkin {
 	public static String[] getFromPlayer(Player playerBukkit) {
 		GameProfile profile = getProfile(playerBukkit);
 		Property property = profile.getProperties().get("textures").iterator().next();
-		String texture = property.getValue();
-		String signature = property.getSignature();
+		String texture = property.value();
+		String signature = property.signature();
 
 		return new String[] { texture, signature };
 	}

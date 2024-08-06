@@ -7,20 +7,8 @@ version: ${project.version}
 api-version: 1.13
 softdepend:
   - PlaceholderAPI
-  - FeatherBoard
   - TAB
-  - TitleManager
-  - SternalBoard
-  - Guilds
   - Factions
-  - FactionsX
-  - SuperiorSkyblock2
-  - LegacyFactions
-  - UltimateFactions
   - Multiverse-Core
-  - SimpleClan
-  - zSchedulers
   - DecentHolograms
-  - HuskTowns
-  - Lands
 commands:

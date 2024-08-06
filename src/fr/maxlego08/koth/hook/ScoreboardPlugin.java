@@ -2,10 +2,7 @@ package fr.maxlego08.koth.hook;
 
 import fr.maxlego08.koth.KothPlugin;
 import fr.maxlego08.koth.api.KothScoreboard;
-import fr.maxlego08.koth.hook.scoreboard.FeatherBoardHook;
-import fr.maxlego08.koth.hook.scoreboard.SternalBoardHook;
 import fr.maxlego08.koth.hook.scoreboard.TabHook;
-import fr.maxlego08.koth.hook.scoreboard.TitleManagerHook;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
@@ -13,11 +10,7 @@ import java.lang.reflect.InvocationTargetException;
 
 public enum ScoreboardPlugin {
 
-    FEATHERBOARD("FeatherBoard", FeatherBoardHook.class),
     TAB("TAB", TabHook.class),
-    STERNALBOARD("SternalBoard", SternalBoardHook.class),
-    TITLEMANAGER("TitleManager", TitleManagerHook.class),
-
     ;
 
     private final String pluginName;
